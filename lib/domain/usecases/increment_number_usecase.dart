@@ -3,26 +3,25 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:rxdart/rxdart.dart';
 import '../repositories/number_repository.dart';
 
-class IncrementNumberUseCase extends UseCase<IncrementNumberUseCaseResponse, IncrementNumberUseCaseParams> {
+class IncrementNumberUseCase extends UseCase<int, IncrementNumberUseCaseParams> {
   final NumberRepository numberRepository;
   IncrementNumberUseCase(this.numberRepository);
 
   @override
-  Future<Observable<IncrementNumberUseCaseResponse>> buildUseCaseObservable(IncrementNumberUseCaseParams params) async {
-    final StreamController<IncrementNumberUseCaseResponse> controller = StreamController();
-    try {
-      controller.add(await numberRepository.incrementNumber(params.value));
-    } catch(err) {
-      controller.addError(err);
-    }
+  Future<Observable<int>> buildUseCaseObservable(IncrementNumberUseCaseParams params) async {
+    final StreamController<int> controller = StreamController();
+    int currentValue = numberRepository.getNumber();
+
+    if(currentValue == 10) {
+       controller.addError("Number must be between 0 and 10.");
+     } else {
+       await numberRepository.setNumber(currentValue+= params.value);
+       controller.add(await numberRepository.getNumber());
+     }
+
     controller.close();
     return Observable(controller.stream);
   }
-}
-
-class IncrementNumberUseCaseResponse {
-  final int value;
-  IncrementNumberUseCaseResponse(this.value);
 }
 
 class IncrementNumberUseCaseParams {

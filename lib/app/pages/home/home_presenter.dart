@@ -34,14 +34,13 @@ class HomePresenter extends Presenter {
   }
 }
 
-class _IncrementNumberObserver implements Observer<IncrementNumberUseCaseResponse> {
+class _IncrementNumberObserver implements Observer<int> {
   final HomePresenter presenter;
   _IncrementNumberObserver(this.presenter);
 
   @override
   void onComplete() {
-    assert(presenter.incrementNumberOnComplete != null);
-    presenter.incrementNumberOnComplete();
+    // TODO: implement onComplete
   }
 
   @override
@@ -51,13 +50,13 @@ class _IncrementNumberObserver implements Observer<IncrementNumberUseCaseRespons
   }
 
   @override
-  void onNext(IncrementNumberUseCaseResponse response) {
+  void onNext(int response) {
     assert(presenter.incrementNumberOnComplete != null);
-    presenter.incrementNumberOnNext(response.value);
+    presenter.incrementNumberOnNext(response);
   }
 }
 
-class _DecrementNumberObserver implements Observer<DecrementNumberUseCaseResponse> {
+class _DecrementNumberObserver implements Observer<int> {
   final HomePresenter presenter;
   _DecrementNumberObserver(this.presenter);
 
@@ -73,9 +72,9 @@ class _DecrementNumberObserver implements Observer<DecrementNumberUseCaseRespons
   }
 
   @override
-  void onNext(DecrementNumberUseCaseResponse response) {
+  void onNext(int response) {
     assert(presenter.incrementNumberOnComplete != null);
-    presenter.incrementNumberOnNext(response.value);
+    presenter.incrementNumberOnNext(response);
   }
 
 }

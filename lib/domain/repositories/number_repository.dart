@@ -1,4 +1,4 @@
 abstract class NumberRepository {
-  incrementNumber(int value);
-  decrementNumber(int value);
+  setNumber(int value);
+  getNumber();
 }

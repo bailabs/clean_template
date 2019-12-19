@@ -18,7 +18,7 @@ class HomeController extends Controller {
      //TODO: implement onComplete
     };
     presenter.incrementNumberOnError = (error) {
-      _showSnackBar(error);
+      _showDialog(error);
     };
     presenter.incrementNumberOnNext = (currentValue) {
       value = currentValue;
@@ -29,7 +29,7 @@ class HomeController extends Controller {
       //TODO: implement onComplete
     };
     presenter.decrementNumberOnError = (error) {
-     _showSnackBar(error);
+     _showDialog(error);
     };
     presenter.decrementNumberOnNext = (currentValue) {
       value = currentValue;
@@ -39,7 +39,7 @@ class HomeController extends Controller {
   void incrementNumber(number) => this.presenter.incrementNumber(number['value']);
   void decrementNumber(number) => this.presenter.decrementNumber(number['value']);
 
-  void _showSnackBar(message) {
+  void _showDialog(message) {
 //    print(message);
       BuildContext scaffoldContext = getContext();
       showDialog(

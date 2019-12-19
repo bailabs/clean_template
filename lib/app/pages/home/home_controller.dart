@@ -40,7 +40,7 @@ class HomeController extends Controller {
   void decrementNumber(number) => this.presenter.decrementNumber(number['value']);
 
   void _showDialog(message) {
-//    print(message);
+
       BuildContext scaffoldContext = getContext();
       showDialog(
           context: scaffoldContext,

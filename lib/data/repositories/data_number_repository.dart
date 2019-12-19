@@ -1,4 +1,6 @@
 import 'package:clean_template/domain/repositories/number_repository.dart';
+import 'package:clean_template/domain/usecases/increment_number_usecase.dart';
+import 'package:clean_template/domain/usecases/decrement_number_usecase.dart';
 
 class DataNumberRepository extends NumberRepository {
   int currentValue;
@@ -11,8 +13,20 @@ class DataNumberRepository extends NumberRepository {
   factory DataNumberRepository() => _instance;
 
   @override
-  int incrementNumber(int value)  {
+  IncrementNumberUseCaseResponse incrementNumber(int value)  {
+    if(currentValue == 10) {
+      throw "Number must be between 0 and 10.";
+    }
     currentValue+=value;
-    return currentValue;
+    return IncrementNumberUseCaseResponse(currentValue);
+  }
+
+  @override
+  DecrementNumberUseCaseResponse decrementNumber(int value) {
+    if(currentValue == 0) {
+      throw "Number must be between 0 and 10.";
+    }
+    currentValue-=value;
+    return DecrementNumberUseCaseResponse(currentValue);
   }
 }

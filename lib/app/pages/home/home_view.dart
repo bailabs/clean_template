@@ -15,14 +15,31 @@ class _HomeViewState extends ViewState<HomeView, HomeController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    key: globalKey,
     appBar: AppBar(
       title: Text('Flutter Demo Home Page'),
     ),
     body:NumberDisplay(currentValue: controller.value),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () => callHandler(controller.incrementNumber, params: {"value":1}),
-      tooltip: 'Increment',
-      child: Icon(Icons.add),
-    ),
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(left:31),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: FloatingActionButton(
+                onPressed: () => callHandler(controller.decrementNumber, params: {"value":1}),
+                child: Icon(Icons.remove),
+              ),
+            ),
+          ),
+
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              onPressed: () => callHandler(controller.incrementNumber, params: {"value":1}),
+              child: Icon(Icons.add),
+            ),
+          ),
+        ],
+      )
   );
 }
